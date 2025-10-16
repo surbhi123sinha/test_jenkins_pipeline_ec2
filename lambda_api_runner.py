@@ -35,13 +35,13 @@ def call_api(action, instance_id=None):
         return None
  
 if __name__ == '__main__':
-    # Default action: 'create' (change to 'list', 'stop', etc., or set ACTION env var in Jenkins)
-    action = os.getenv('ACTION', 'create')  # Examples: 'stop', 'list', 'terminate'
-    instance_id = os.getenv('INSTANCE_ID')  # Optional, e.g., 'i-02faf7724931b5c0c' for stop/terminate
+    # Default action: 'create' (change to 'stop', etc.)
+    action = 'stop'  # Change this to 'start', 'terminate', or 'create' as needed
+    instance_id = 'i-0f4a386c7be2ff09d'  # Replace with your actual EC2 instance ID
+ 
     result = call_api(action, instance_id)
     if result and 'error' not in str(result).lower():
-        # print("Success! Check EC2 console for details.")
-        print("✅ EC2 action completed successfully!")
+        print("Success! Check EC2 console for details!")
     else:
-        print("Failed—check AWS Lambda logs or response above.")
+        print("Failed—check AWS Lambda logs or response above..")
  
