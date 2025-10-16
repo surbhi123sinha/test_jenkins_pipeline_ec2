@@ -14,16 +14,24 @@ pipeline {
     }
 
     stages {
+        stage('Debug Info') {
+            steps {
+                echo "Pipeline started with ACTION=${params.ACTION}, INSTANCE_ID=${params.INSTANCE_ID}"
+            }
+        }
+
         stage('Checkout') {
             steps {
+                echo "Checking out code..."
                 checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
+                echo "Installing Python dependencies..."
                 bat '''
-                    echo Installing Python dependencies...
+                    python --version
                     python -m pip install --upgrade pip
                     pip install requests
                 '''
@@ -32,9 +40,9 @@ pipeline {
 
         stage('Run Lambda API Trigger') {
             steps {
+                echo "Running Lambda API Script..."
                 bat '''
-                    echo Running Lambda API Script...
-                    python lambda_api_runner.py || exit /b 1
+                    python lambda_api_runner.py
                 '''
             }
         }
