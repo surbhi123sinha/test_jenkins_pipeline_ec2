@@ -6,7 +6,7 @@ import os
 ENDPOINT = os.getenv('ENDPOINT', 'https://11fb1wqzn4.execute-api.us-east-1.amazonaws.com')
  
 # Your public IP for security (from whatismyip.com + /32—update with yours)
-MY_IP = os.getenv('MY_IP', '165.225.120.94/32')  
+MY_IP = os.getenv('MY_IP', '136.226.232.163/32')  
  
 def call_api(action, instance_id=None):
     payload = {'action': action}
@@ -44,4 +44,5 @@ if __name__ == '__main__':
     else:
         print("Failed—check AWS Lambda logs or response above..")
  
+
 
