@@ -6,7 +6,8 @@ import os
 ENDPOINT = os.getenv('ENDPOINT', 'https://11fb1wqzn4.execute-api.us-east-1.amazonaws.com')
  
 # Your public IP for security (from whatismyip.com + /32—update with yours)
-MY_IP = os.getenv('MY_IP', '136.226.232.163/32')  
+# MY_IP = os.getenv('MY_IP', '165.225.120.94/32')  
+MY_IP = os.getenv('MY_IP', '136.226.232.163/32') 
  
 def call_api(action, instance_id=None):
     payload = {'action': action}
@@ -34,15 +35,13 @@ def call_api(action, instance_id=None):
         return None
  
 if __name__ == '__main__':
-    # Default action: 'create' (change to 'stop', etc.)
-    action = 'stop'  # Change this to 'start', 'terminate', or 'create' as needed
-    instance_id = 'i-0f4a386c7be2ff09d'  # Replace with your actual EC2 instance ID
- 
+    # Default action: 'create' (change to 'list', 'stop', etc., or set ACTION env var in Jenkins)
+    action = os.getenv('ACTION', 'create')  # Examples: 'stop', 'list', 'terminate'
+    instance_id = os.getenv('INSTANCE_ID')  # Optional, e.g., 'i-02faf7724931b5c0c' for stop/terminate
     result = call_api(action, instance_id)
     if result and 'error' not in str(result).lower():
-        print("Success! Check EC2 console for details!")
+        # print("Success! Check EC2 console for details.")
+        print(" EC2 action completed successfully!")
     else:
-        print("Failed—check AWS Lambda logs or response above..")
+        print("Failed—check AWS Lambda logs or response above.")
  
-
-
