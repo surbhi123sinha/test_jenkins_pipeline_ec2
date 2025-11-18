@@ -1,4 +1,3 @@
-
 import requests
 import json
 import os
@@ -45,3 +44,4 @@ if __name__ == '__main__':
     else:
         print("Failed—check AWS Lambda logs or response above..")
  
+
